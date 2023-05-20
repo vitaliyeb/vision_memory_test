@@ -16,6 +16,10 @@ export const dataTest = {
         name: 'Найди числа по порядку от 1 до 25',
         logs: []
     },
+    shulteRandomCharTest: {
+        name: '',
+        logs: []
+    },
     shulteRandomNumbers: {
         name: "Найди рандомное число",
         logs: []
@@ -45,6 +49,30 @@ const makeRandomArray = (initialArr) => {
 
 function App() {
     const [componentId, setComponentId] = useState(0);
+    const [Ra, serRa] = useState(makeRandomArray([
+        () => <ShulteMulti
+            heading="Найдите число: "
+            logs={dataTest.shulteRandomNumbers.logs}
+            items={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1))}
+            variants={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1)).slice(0, 2)}
+            next={() => setComponentId(4)}
+        />,
+        () => <ShulteMulti
+            heading="Найдите букву: "
+            logs={dataTest.shulteRandomChar.logs}
+            items={makeRandomArray(chars)}
+            variants={makeRandomArray(chars).slice(0, 2)}
+            next={() => setComponentId(4)}
+        />,
+        () => <ShulteMulti
+            heading="Найдите слово: "
+            logs={dataTest.shulteRandomWords.logs}
+            items={makeRandomArray(words)}
+            variants={makeRandomArray(words).slice(0, 2)}
+            next={() => setComponentId(4)}
+        />
+    ]))
+
     return (
         <div className="App">
             {componentId === 0 && <Login setComponentId={setComponentId}/>}
@@ -58,40 +86,31 @@ function App() {
                 next={() => setComponentId(2)}
             />}
             {componentId === 2 && <ShulteMulti
-                heading="Найдите число: "
-                logs={dataTest.shulteRandomNumbers.logs}
-                items={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1))}
-                variants={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1)).slice(0, 11)}
+                heading="Найдите букву: "
+                logs={dataTest.shulteRandomCharTest.logs}
+                items={makeRandomArray(chars)}
+                variants={makeRandomArray(chars).slice(0, 5)}
                 next={() => setComponentId(-3)}
             />}
             {componentId === -3 && <Banner
-                text="Отлично!  "
+                text="Замечательно! Продолжайте также искать буквы/числа/слова в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"
                 next={() => setComponentId(3)}
             />}
-            {componentId === 3 && <ShulteMulti
-                heading="Найдите букву: "
-                logs={dataTest.shulteRandomChar.logs}
-                items={makeRandomArray(chars)}
-                variants={makeRandomArray(chars).slice(0, 11)}
-                next={() => setComponentId(-4)}
-            />}
-            {componentId === -4 && <Banner
-                text="Отлично!  "
-                next={() => setComponentId(4)}
-            />}
-            {componentId === 4 && <ShulteMulti
-                heading="Найдите слово: "
-                logs={dataTest.shulteRandomWords.logs}
-                items={makeRandomArray(words)}
-                variants={makeRandomArray(words).slice(0, 11)}
-                next={() => setComponentId(-5)}
-            />}
+
             {
-                componentId === -5 && <End/>
+                Boolean(Ra.length && componentId === 3) && Ra[0]()
             }
-            {/*<RenderComponent />*/}
-            {/*{RenderComponent}*/}
-            {/*<RenderComponent nextComponent={setRenderComponent}/>*/}
+            {
+                Boolean(Ra.length === 1 && componentId === 4) && <End/>
+            }
+            {
+                Boolean(Ra.length > 1 && componentId === 4) && <Banner
+                    text="Отлично!  "
+                    next={() => {
+                        serRa(prevState => [...prevState.slice(1)])
+                        setComponentId(3)
+                    }}
+                />}
         </div>
     );
 }
