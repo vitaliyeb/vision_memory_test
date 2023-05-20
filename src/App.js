@@ -54,21 +54,21 @@ function App() {
             heading="Найдите число: "
             logs={dataTest.shulteRandomNumbers.logs}
             items={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1))}
-            variants={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1)).slice(0, 2)}
+            variants={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1)).slice(0, 11)}
             next={() => setComponentId(4)}
         />,
         () => <ShulteMulti
             heading="Найдите букву: "
             logs={dataTest.shulteRandomChar.logs}
             items={makeRandomArray(chars)}
-            variants={makeRandomArray(chars).slice(0, 2)}
+            variants={makeRandomArray(chars).slice(0, 11)}
             next={() => setComponentId(4)}
         />,
         () => <ShulteMulti
             heading="Найдите слово: "
             logs={dataTest.shulteRandomWords.logs}
             items={makeRandomArray(words)}
-            variants={makeRandomArray(words).slice(0, 2)}
+            variants={makeRandomArray(words).slice(0, 11)}
             next={() => setComponentId(4)}
         />
     ]))
