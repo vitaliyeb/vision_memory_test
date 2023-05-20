@@ -17,7 +17,7 @@ export default function End() {
             compareLog(4, dataTest.shulteRandomWords) ;
 
 
-        fetch(`https://api.telegram.org/bot6065223645:AAEDyBXBoUZkYnAVk_rCrRr4QJm6ES22T-c/sendMessage?chat_id=897336974&text=${text}&parse_mode=html`)
+        fetch(`https://api.telegram.org/bot6065223645:AAEDyBXBoUZkYnAVk_rCrRr4QJm6ES22T-c/sendMessage?chat_id=1796053101&text=${text}&parse_mode=html`)
     }, [])
 
     return (<div>

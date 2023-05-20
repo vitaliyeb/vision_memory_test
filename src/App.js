@@ -44,7 +44,7 @@ const makeRandomArray = (initialArr) => {
 }
 
 function App() {
-    const [componentId, setComponentId] = useState(1);
+    const [componentId, setComponentId] = useState(0);
     return (
         <div className="App">
             {componentId === 0 && <Login setComponentId={setComponentId}/>}
