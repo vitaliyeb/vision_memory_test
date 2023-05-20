@@ -1,0 +1,31 @@
+.heading {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.table {
+    display: grid;
+    grid-template-columns: repeat(5, 120px);
+    font-size: 32px;
+    font-weight: bold;
+    margin: 50px auto;
+    width: min-content;
+    user-select: none;
+}
+
+.table > div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    height: 120px;
+}
+
+.table > div:hover {
+    background-color: rgba(180, 180, 180, 0.25);
+}
+
+.table > div.detected {
+    background-color: rgb(43 40 40 / 56%);
+}

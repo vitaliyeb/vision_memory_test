@@ -1,0 +1,14 @@
+.heading {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.button {
+    margin: 100px auto 0;
+    font-size: 24px;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: min-content;
+    padding: 15px 35px;
+}
