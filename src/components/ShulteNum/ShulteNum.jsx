@@ -2,17 +2,20 @@ import styles from './styles.module.css';
 import {useEffect, useMemo, useRef, useState} from "react";
 import moment from "moment";
 import {dataTest} from "../../App";
+import Banner from '../Banner/Banner';
 
-
-export default function ShulteNum({ setComponentId }) {
+export default function ShulteNum({ setComponentId, banner }) {
     const task = dataTest.shulteNumbers;
     const [detected, setDetected] = useState([]);
     const startTime = useRef(Date.now());
     const lastTime = useRef(startTime.current);
+    const [isVisibleBanner, setIsVisibleBanner] = useState(true);
 
     useEffect(() => {
-        task.logs.push(`Начало выполнения ${moment().format('MMMM Do YYYY, h:mm:ss a')}`);
-    }, [])
+        if(!isVisibleBanner) {
+            task.logs.push(`Начало выполнения ${moment().format('MMMM Do YYYY, h:mm:ss a')}`);
+        }
+    }, [isVisibleBanner])
 
     const randomInt = useMemo(() => {
         let numbers = Array.from({length: 25}).map((_, i) => i+1);
@@ -30,6 +33,11 @@ export default function ShulteNum({ setComponentId }) {
             setComponentId(-2)
         }
     }, [detected])
+
+    if(isVisibleBanner) {
+        return <Banner text={banner} next={() => setIsVisibleBanner(false)}/>
+    }
+
 
     const handleClick = (num) => {
         if (!detected.length) {
@@ -58,7 +66,7 @@ export default function ShulteNum({ setComponentId }) {
                 randomInt.map((num) => (<div
                     key={num}
                     onClick={() => handleClick(num)}
-                    className={detected.includes(num) ? styles.detected : ''}
+                    // className={detected.includes(num) ? styles.detected : ''}
                 >{ num }</div>))
             }
         </div>

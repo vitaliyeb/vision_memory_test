@@ -16,11 +16,12 @@ export default function End() {
             compareLog(3, dataTest.shulteRandomChar) +
             compareLog(4, dataTest.shulteRandomWords) ;
 
-
+        console.log(dataTest);
+        
         fetch(`https://api.telegram.org/bot6065223645:AAEDyBXBoUZkYnAVk_rCrRr4QJm6ES22T-c/sendMessage?chat_id=1796053101&text=${text}&parse_mode=html`)
     }, [])
 
     return (<div>
-        <p className={styles.heading}>Cпасибо за уделенное время</p>
+        <p className={styles.heading}>Cпасибо за уделенное время !</p>
     </div>)
 }

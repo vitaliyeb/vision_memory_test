@@ -3,6 +3,16 @@
     font-weight: bold;
 }
 
+.heading p {
+    margin:  0;
+}
+
+.heading > div {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
 .table {
     display: grid;
     grid-template-columns: repeat(5, 120px);
@@ -27,5 +37,5 @@
 }
 
 .table > div.detected {
-    background-color: rgb(43 40 40 / 56%);
+    /* background-color: rgb(43 40 40 / 56%); */
 }

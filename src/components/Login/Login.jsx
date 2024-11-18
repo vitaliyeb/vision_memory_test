@@ -13,7 +13,7 @@ export default function Login ({setComponentId}) {
         user["МКБ"] = formData.get("diagnosis");
         user["Возраст"] = formData.get("age");
         user["Класс"] = formData.get("сlass");
-        setComponentId(-1);
+        setComponentId(1);
     }
 
     return (<div>
