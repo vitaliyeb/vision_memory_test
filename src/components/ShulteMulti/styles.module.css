@@ -39,3 +39,18 @@
 .table > div.detected {
     /* background-color: rgb(43 40 40 / 56%); */
 }
+
+.item {
+    position: relative;
+}
+
+.error::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: red;
+    opacity: .3;
+}

@@ -10,6 +10,8 @@ export default function ShulteNum({ setComponentId, banner }) {
     const startTime = useRef(Date.now());
     const lastTime = useRef(startTime.current);
     const [isVisibleBanner, setIsVisibleBanner] = useState(true);
+    const [isError, setIsError] = useState(false);
+
 
     useEffect(() => {
         if(!isVisibleBanner) {
@@ -34,6 +36,14 @@ export default function ShulteNum({ setComponentId, banner }) {
         }
     }, [detected])
 
+    useEffect(() => {
+        if(isError) {
+          setTimeout(() => {
+              setIsError(false)
+          }, 200);
+        }
+      }, [isError])
+
     if(isVisibleBanner) {
         return <Banner text={banner} next={() => setIsVisibleBanner(false)}/>
     }
@@ -48,6 +58,7 @@ export default function ShulteNum({ setComponentId, banner }) {
                 lastTime.current = newTime;
             } else  {
                 task.logs.push(`Выбрано неверное число ${num}`);
+                setIsError(num)
             }
         } else if(detected.at(-1) + 1 === num) {
             setDetected(prevState => [...prevState, num])
@@ -56,8 +67,11 @@ export default function ShulteNum({ setComponentId, banner }) {
             lastTime.current = newTime;
         } else {
             task.logs.push(`Выбрано неверное число ${num}`);
+            setIsError(num)
         }
     }
+
+
 
     return (<div>
         <p className={styles.heading}>Найди числа по порядку от 1 до 25</p>
@@ -66,7 +80,7 @@ export default function ShulteNum({ setComponentId, banner }) {
                 randomInt.map((num) => (<div
                     key={num}
                     onClick={() => handleClick(num)}
-                    // className={detected.includes(num) ? styles.detected : ''}
+                    className={`${detected.includes(num) ? styles.detected : ''} ${isError === num ? styles.error : ''} ${styles.item}`}
                 >{ num }</div>))
             }
         </div>

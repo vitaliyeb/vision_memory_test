@@ -14,9 +14,11 @@ export default function End() {
             compareLog(1, dataTest.shulteNumbers) +
             compareLog(2, dataTest.shulteRandomNumbers) +
             compareLog(3, dataTest.shulteRandomChar) +
-            compareLog(4, dataTest.shulteRandomWords) ;
-
-        console.log(dataTest);
+            compareLog(4, dataTest.shulteRandomWords) +
+            compareLog(5, dataTest.shulteRandomColors) +
+            compareLog(6, dataTest.shulteRandomImages) +
+            compareLog(7, dataTest.shulteRandomImagesWithParent) +
+            compareLog(8, dataTest.shulteRandomCharWithParent) 
         
         fetch(`https://api.telegram.org/bot6065223645:AAEDyBXBoUZkYnAVk_rCrRr4QJm6ES22T-c/sendMessage?chat_id=1796053101&text=${text}&parse_mode=html`)
     }, [])
