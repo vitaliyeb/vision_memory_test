@@ -4,6 +4,8 @@ import moment from "moment";
 import {dataTest} from "../../App";
 import Banner from '../Banner/Banner';
 
+import { LOGS } from './../../App';
+
 export default function ShulteNum({ setComponentId, banner }) {
     const task = dataTest.shulteNumbers;
     const [detected, setDetected] = useState([]);
@@ -12,6 +14,10 @@ export default function ShulteNum({ setComponentId, banner }) {
     const [isVisibleBanner, setIsVisibleBanner] = useState(true);
     const [isError, setIsError] = useState(false);
 
+
+    useEffect(() => {
+        LOGS.push('shulteNumbers')
+    }, []);
 
     useEffect(() => {
         if(!isVisibleBanner) {

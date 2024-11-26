@@ -2,8 +2,9 @@ import styles from './styles.module.css';
 import {useEffect, useRef, useState} from "react";
 import moment from "moment/moment";
 import Banner from '../Banner/Banner';
+import { LOGS } from './../../App';
 
-export default function ShulteMulti({ items, heading, variants, logs, next, isColor, isImages, banner}) {
+export default function ShulteMulti({ items, heading, variants, logs, next, isColor, isImages, banner, logKey}) {
     const [dertyVariant] = useState([...variants]);
     const [currentDetected, setCurrentDetected] = useState('');
     const [detected, setDetected] = useState([]);
@@ -18,6 +19,10 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
             setCurrentDetected(dertyVariant.shift())
         }
     }, [isVisibleBanner])
+
+    useEffect(() => {
+        LOGS.push(logKey)
+    }, [])
 
     const handleClick = (item) => {        
         if (currentDetected === item) {

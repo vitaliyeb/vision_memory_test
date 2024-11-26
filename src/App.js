@@ -120,7 +120,7 @@ const images = [
 }
 ]
 
-
+export const LOGS = []; 
 
 
 const MAX_VARIANTS = 6;
@@ -135,6 +135,7 @@ function App() {
     
     const [Ra, serRa] = useState([
         () => <ShulteNum 
+            logKey={'shulteNumbers'}
             banner="Сейчас вы увидите таблицу из чисел, расположенных в случайном порядке. Вам нужно будет найти числа в порядке возрастания, от 1 до 25. Сделайте это как можно быстрее и без ошибок."
             setComponentId={handleRandomNext}
         />,
@@ -143,6 +144,7 @@ function App() {
             key={"number"}
             heading="Найдите число: "
             banner={"Замечательно! Продолжайте также искать числа в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
+            logKey={'shulteRandomNumbers'}
             logs={dataTest.shulteRandomNumbers.logs}
             items={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1))}
             variants={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1)).slice(0, MAX_VARIANTS)}
@@ -151,6 +153,7 @@ function App() {
         () => <ShulteMulti
             key={"char"}
             heading="Найдите букву: "
+            logKey={'shulteRandomChar'}
             banner={"Замечательно! Продолжайте также искать буквы в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
             logs={dataTest.shulteRandomChar.logs}
             items={makeRandomArray(chars)}
@@ -160,6 +163,7 @@ function App() {
         () => <ShulteMulti
             key={"word"}
             heading="Найдите слово: "
+            logKey={'shulteRandomWords'}
             banner={"Замечательно! Продолжайте также искать слова в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
             logs={dataTest.shulteRandomWords.logs}
             items={makeRandomArray(words)}
@@ -169,6 +173,7 @@ function App() {
         () => <ShulteMulti
             key={"color"}
             heading="Найдите цвета: "
+            logKey={'shulteRandomColors'}
             banner={"Замечательно! Продолжайте также искать цвета в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
             logs={dataTest.shulteRandomColors.logs}
             items={makeRandomArray(colors)}
@@ -179,6 +184,7 @@ function App() {
         () => <ShulteMulti
             key={"parent-char"}
             heading="Найдите букву: "
+            logKey={'shulteRandomCharWithParent'}
             banner={"Отлично! Сейчас будешь выполнять вместе со взрослым, искать буквы по очереди"}
             logs={dataTest.shulteRandomCharWithParent.logs}
             items={makeRandomArray(chars)}
@@ -188,6 +194,7 @@ function App() {
         () => <ShulteMulti
             key={"images"}
             heading="Найдите картинки: "
+            logKey={'shulteRandomImages'}
             banner={"Замечательно! Продолжайте также искать картинки в следующей таблице. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
             logs={dataTest.shulteRandomImages.logs}
             items={images}
@@ -198,6 +205,7 @@ function App() {
         () => <ShulteMulti
             key={"images-parents"}
             heading="Найдите картинки: "
+            logKey={'shulteRandomImagesWithParent'}
             banner={"Отлично! Сейчас будешь выполнять вместе со взрослым, искать картинки по очереди"}
             logs={dataTest.shulteRandomImagesWithParent.logs}
             items={images}
