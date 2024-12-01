@@ -44,10 +44,12 @@ export default function ShulteNum({ setComponentId, banner }) {
 
     useEffect(() => {
         if(isError) {
-          setTimeout(() => {
-              setIsError(false)
-          }, 200);
-        }
+            const errId = setTimeout(() => {
+                setIsError(false)
+            }, 2200);
+
+            return () => clearTimeout(errId)
+          }
       }, [isError])
 
     if(isVisibleBanner) {
