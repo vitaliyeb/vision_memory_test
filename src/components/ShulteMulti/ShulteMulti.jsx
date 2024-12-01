@@ -24,8 +24,8 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
         LOGS.push(logKey)
     }, [])
 
-    const handleClick = (item) => {        
-        if (currentDetected === item) {
+    const handleClick = (item) => {       
+        if (currentDetected === item || (isColor && item.includes(currentDetected))) {
             const newTime = Date.now();
             logs.push(`Найдено ${isImages ? item.name : item} спустя ${moment(newTime).diff(lastTime.current, 'second', true)} секунды`);
             lastTime.current = newTime;
@@ -43,9 +43,11 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
     
     useEffect(() => {
         if(isError) {
-            setTimeout(() => {
+            const errId = setTimeout(() => {
                 setIsError(false)
-            }, 200);
+            }, 2200);
+
+            return () => clearTimeout(errId)
           }
     }, [isError])
 
@@ -72,15 +74,25 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
            
 
             {
-                items.map((item) => (<div
-                    style={{
-                        backgroundColor: isColor ? item : undefined 
-                    }}
-                    key={isImages ? item.name : item}
+                items.map((item, idx) => (<div
+                    key={isImages ? item.name : isColor ? idx : item}
                     onClick={() => handleClick(item)}
                     className={`${detected.includes(item) ? styles.detected : ''} ${isError === item ? styles.error : ''} ${styles.item}`}
-                >
-                    { isColor ? undefined  : isImages ? <img src={item.src} title={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain'}} alt="" /> : item }
+                    alt={item}
+                    title={item}
+               >
+                    
+                    { isColor ? 
+                    <div className={styles.colorWrapper}>
+                        <div style={{
+                            backgroundColor: item[0],
+                            top: 0,
+                        }}></div>
+                        <div style={{
+                            backgroundColor: item[1],
+                             top: '50%',
+                        }}></div>
+                    </div>  : isImages ? <img src={item.src} title={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain'}} alt="" /> : item }
                 </div>))
             }
         </div>

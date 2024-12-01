@@ -54,3 +54,18 @@
     background-color: red;
     opacity: .3;
 }
+
+.colorWrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.colorWrapper > div {
+    width: 100%;
+    position: absolute;
+    height: 50%;
+}

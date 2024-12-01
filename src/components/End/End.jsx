@@ -9,9 +9,11 @@ const compareLog = (i, task) => `%0A Задание ${i} - ${task.name}:%0A` + t
 
 export default function End() {
 
-    useEffect(() => {
+    useEffect(() => {        
         const text = Object.entries(dataTest.user).map(([key, value]) => `${key}: ${value}%0A`).join('') +
-        LOGS.map((key, idx) => compareLog(idx, dataTest[key])).join(' ');
+        LOGS.map((key, idx) => {            
+            return compareLog(idx + 1, dataTest[key])
+        }).join('%0A');
         
         fetch(`https://api.telegram.org/bot6065223645:AAEDyBXBoUZkYnAVk_rCrRr4QJm6ES22T-c/sendMessage?chat_id=1796053101&text=${text}&parse_mode=html`)
     }, [])
