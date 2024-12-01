@@ -118,7 +118,7 @@ export const LOGS = [];
 const MAX_VARIANTS = 6;
 
 function App() {
-    const [componentId, setComponentId] = useState(1);
+    const [componentId, setComponentId] = useState(0);
 
     const [colorVatiants, imagesVariants] = useMemo(() => [
         makeRandomArray(itemsColors).slice(0, 11),
