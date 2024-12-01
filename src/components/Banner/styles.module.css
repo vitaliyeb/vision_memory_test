@@ -12,3 +12,7 @@
     width: min-content;
     padding: 15px 35px;
 }
+
+.heading b {
+    color: #ff4343;
+}

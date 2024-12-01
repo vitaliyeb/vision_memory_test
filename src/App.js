@@ -69,30 +69,19 @@ const chars = makeRandomArray(['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', '
 const words = ['АКТ', 'ЮЛА', 'СЫН', 'ШИП', 'ОСА', 'МАК', 'КОТ', 'САД', 'РОГ', 'МИР', 'ОПТ', 'НОЖ', 'МЕХ', 'КОМ', 'ИВА', 'ЗАЛ', 'ЖАР', 'ДУБ', 'НОС', 'БЕГ'];
 
 const colors = makeRandomArray([
-    "aqua",
     "blue",
     "brown",
-    "cadetblue",
-    "chocolate",
-    "cornflowerblue",
-    "crimson",
-    "darkred",
     "gold",
-    "blueviolet",
     "green",
     "black",
-    "mediumvioletred",
     "pink",
-    "mediumspringgreen",
-    "olive",
-    "silver",
-    "yellowgreen",
-    "lavender",
-    "lightseagreen"
+    "blueviolet",
+    'red',
+    'orange'
 ]);
 
 
-const itemsColors = colors.map((color) => [color, makeRandomArray(colors)[0]])
+const itemsColors = Array.from({ length: 20 }).map(() => [makeRandomArray(makeRandomArray(colors))[0], makeRandomArray(makeRandomArray(colors))[0]])
 
 const images = [
 {name: 'Соска', src: "data:image/jpeg;base64,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",
@@ -129,10 +118,10 @@ export const LOGS = [];
 const MAX_VARIANTS = 6;
 
 function App() {
-    const [componentId, setComponentId] = useState(0);
+    const [componentId, setComponentId] = useState(1);
 
     const [colorVatiants, imagesVariants] = useMemo(() => [
-        makeRandomArray(colors).slice(0, 11),
+        makeRandomArray(itemsColors).slice(0, 11),
         makeRandomArray(images).slice(0, 11)
     ], [])
     
@@ -188,7 +177,7 @@ function App() {
             key={"parent-char"}
             heading="Найдите букву: "
             logKey={'shulteRandomCharWithParent'}
-            banner={"Отлично! Сейчас будешь выполнять вместе со взрослым, искать буквы по очереди"}
+            banner={"Отлично! Сейчас будешь выполнять <b>вместе со взрослым</b>, искать буквы по очереди"}
             logs={dataTest.shulteRandomCharWithParent.logs}
             items={makeRandomArray(chars)}
             variants={makeRandomArray(chars).slice(0, MAX_VARIANTS)}
@@ -209,9 +198,9 @@ function App() {
             key={"images-parents"}
             heading="Найдите картинки: "
             logKey={'shulteRandomImagesWithParent'}
-            banner={"Отлично! Сейчас будешь выполнять вместе со взрослым, искать картинки по очереди"}
+            banner={"Отлично! Сейчас будешь выполнять <b>вместе со взрослым</b>, искать картинки по очереди"}
             logs={dataTest.shulteRandomImagesWithParent.logs}
-            items={images}
+            items={makeRandomArray(images)}
             variants={imagesVariants.slice(0, MAX_VARIANTS)}
             next={handleRandomNext}
             isImages

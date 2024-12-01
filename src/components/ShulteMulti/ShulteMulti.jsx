@@ -12,6 +12,7 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
     const lastTime = useRef(startTime.current);
     const [isVisibleBanner, setIsVisibleBanner] = useState(true);
     const [isError, setIsError] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     useEffect(() => {
         if(!isVisibleBanner) {
@@ -25,7 +26,7 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
     }, [])
 
     const handleClick = (item) => {       
-        if (currentDetected === item || (isColor && item.includes(currentDetected))) {
+        if (currentDetected === item || (isColor && item.toString() === currentDetected.toString())) {
             const newTime = Date.now();
             logs.push(`Найдено ${isImages ? item.name : item} спустя ${moment(newTime).diff(lastTime.current, 'second', true)} секунды`);
             lastTime.current = newTime;
@@ -33,6 +34,7 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
                 logs.push(`Задание закончено за ${moment(Date.now()).diff(startTime.current, 'second', true)} секунд`);
                 return next();
             }
+            setIsSuccess(item);
             setDetected(prevState => [...prevState, item]);
             setCurrentDetected(dertyVariant.shift());
         } else {
@@ -51,6 +53,16 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
           }
     }, [isError])
 
+    useEffect(() => {
+        if(isSuccess) {
+            const errId = setTimeout(() => {
+                setIsSuccess(false)
+            }, 2200);
+
+            return () => clearTimeout(errId)
+          }
+    }, [isSuccess])
+
     if(isVisibleBanner) {
         return <Banner text={banner} next={() => setIsVisibleBanner(false)}/>
     }
@@ -64,7 +76,18 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
                         key={isImages ? variant.name : variant}
                         style={isColor ? { backgroundColor: variant, width: '25px', height: '25px', display: 'inline-block'} : {}}
                     >
-                        { isColor ? undefined : isImages ? <img src={variant.src} style={{ display: 'block', width: '45px', height: '45px', }}/> : variant }
+                        { isColor ? 
+                            <div className={styles.colorWrapper}>
+                                <div style={{
+                                    backgroundColor: variant[0],
+                                    top: 0,
+                                }}></div>
+                                <div style={{
+                                    backgroundColor: variant[1],
+                                    top: '50%',
+                                }}></div>
+                            </div>
+                         : isImages ? <img src={variant.src} style={{ display: 'block', width: '45px', height: '45px', }}/> : variant }
                         {}
                     </div>)
                 }
@@ -77,9 +100,7 @@ export default function ShulteMulti({ items, heading, variants, logs, next, isCo
                 items.map((item, idx) => (<div
                     key={isImages ? item.name : isColor ? idx : item}
                     onClick={() => handleClick(item)}
-                    className={`${detected.includes(item) ? styles.detected : ''} ${isError === item ? styles.error : ''} ${styles.item}`}
-                    alt={item}
-                    title={item}
+                    className={`${detected.includes(item) ? styles.detected : ''} ${isError === item ? styles.error : ''} ${isSuccess === item ? styles.success : undefined} ${styles.item}`}
                >
                     
                     { isColor ? 
