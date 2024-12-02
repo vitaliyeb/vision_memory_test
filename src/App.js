@@ -128,7 +128,7 @@ export const LOGS = [];
 const MAX_VARIANTS = 6;
 
 function App() {
-    const [componentId, setComponentId] = useState(1);
+    const [componentId, setComponentId] = useState(0);
 
     const [colorVatiants, imagesVariants] = useMemo(() => [
         makeRandomArray(itemsColors).slice(0, 11),
@@ -136,42 +136,42 @@ function App() {
     ], [])
     
     const [Ra, serRa] = useState([
-        // () => <ShulteNum 
-        //     logKey={'shulteNumbers'}
-        //     banner="Сейчас вы увидите таблицу из чисел, расположенных в случайном порядке. Вам нужно будет найти числа в порядке возрастания, от 1 до 25. Сделайте это как можно быстрее и без ошибок."
-        //     setComponentId={handleRandomNext}
-        // />,
+        () => <ShulteNum 
+            logKey={'shulteNumbers'}
+            banner="Сейчас вы увидите таблицу из чисел, расположенных в случайном порядке. Вам нужно будет найти числа в порядке возрастания, от 1 до 25. Сделайте это как можно быстрее и без ошибок."
+            setComponentId={handleRandomNext}
+        />,
          ...makeRandomArray([
-        // () => <ShulteMulti
-        //     key={"number"}
-        //     heading="Найдите число: "
-        //     banner={"Замечательно! Продолжайте также искать числа в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
-        //     logKey={'shulteRandomNumbers'}
-        //     logs={dataTest.shulteRandomNumbers.logs}
-        //     items={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1))}
-        //     variants={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1)).slice(0, MAX_VARIANTS)}
-        //     next={handleRandomNext}
-        // />,
-        // () => <ShulteMulti
-        //     key={"char"}
-        //     heading="Найдите букву: "
-        //     logKey={'shulteRandomChar'}
-        //     banner={"Замечательно! Продолжайте также искать буквы в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
-        //     logs={dataTest.shulteRandomChar.logs}
-        //     items={makeRandomArray(chars)}
-        //     variants={makeRandomArray(chars).slice(0, MAX_VARIANTS)}
-        //     next={handleRandomNext}
-        // />,
-        // () => <ShulteMulti
-        //     key={"word"}
-        //     heading="Найдите слово: "
-        //     logKey={'shulteRandomWords'}
-        //     banner={"Замечательно! Продолжайте также искать слова в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
-        //     logs={dataTest.shulteRandomWords.logs}
-        //     items={makeRandomArray(words)}
-        //     variants={makeRandomArray(words).slice(0, MAX_VARIANTS)}
-        //     next={handleRandomNext}
-        // />,
+        () => <ShulteMulti
+            key={"number"}
+            heading="Найдите число: "
+            banner={"Замечательно! Продолжайте также искать числа в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
+            logKey={'shulteRandomNumbers'}
+            logs={dataTest.shulteRandomNumbers.logs}
+            items={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1))}
+            variants={makeRandomArray(Array.from({length: 25}).map((_, i) => i + 1)).slice(0, MAX_VARIANTS)}
+            next={handleRandomNext}
+        />,
+        () => <ShulteMulti
+            key={"char"}
+            heading="Найдите букву: "
+            logKey={'shulteRandomChar'}
+            banner={"Замечательно! Продолжайте также искать буквы в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
+            logs={dataTest.shulteRandomChar.logs}
+            items={makeRandomArray(chars)}
+            variants={makeRandomArray(chars).slice(0, MAX_VARIANTS)}
+            next={handleRandomNext}
+        />,
+        () => <ShulteMulti
+            key={"word"}
+            heading="Найдите слово: "
+            logKey={'shulteRandomWords'}
+            banner={"Замечательно! Продолжайте также искать слова в следующих таблицах. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
+            logs={dataTest.shulteRandomWords.logs}
+            items={makeRandomArray(words)}
+            variants={makeRandomArray(words).slice(0, MAX_VARIANTS)}
+            next={handleRandomNext}
+        />,
         () => <ShulteMulti
             key={"color"}
             heading="Найдите цвета: "
@@ -183,38 +183,38 @@ function App() {
             next={handleRandomNext}
             isColor
         />,
-        // () => <ShulteMulti
-        //     key={"parent-char"}
-        //     heading="Найдите букву: "
-        //     logKey={'shulteRandomCharWithParent'}
-        //     banner={"Отлично! Сейчас будешь выполнять <b>вместе со взрослым</b>, искать буквы по очереди"}
-        //     logs={dataTest.shulteRandomCharWithParent.logs}
-        //     items={makeRandomArray(chars)}
-        //     variants={makeRandomArray(chars).slice(0, MAX_VARIANTS)}
-        //     next={handleRandomNext}
-        // />,
-        // () => <ShulteMulti
-        //     key={"images"}
-        //     heading="Найдите картинки: "
-        //     logKey={'shulteRandomImages'}
-        //     banner={"Замечательно! Продолжайте также искать картинки в следующей таблице. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
-        //     logs={dataTest.shulteRandomImages.logs}
-        //     items={images}
-        //     variants={imagesVariants.slice(0, MAX_VARIANTS)}
-        //     next={handleRandomNext}
-        //     isImages
-        // />,
-        // () => <ShulteMulti
-        //     key={"images-parents"}
-        //     heading="Найдите картинки: "
-        //     logKey={'shulteRandomImagesWithParent'}
-        //     banner={"Отлично! Сейчас будешь выполнять <b>вместе со взрослым</b>, искать картинки по очереди"}
-        //     logs={dataTest.shulteRandomImagesWithParent.logs}
-        //     items={makeRandomArray(images)}
-        //     variants={imagesVariants.slice(0, MAX_VARIANTS)}
-        //     next={handleRandomNext}
-        //     isImages
-        // />
+        () => <ShulteMulti
+            key={"parent-char"}
+            heading="Найдите букву: "
+            logKey={'shulteRandomCharWithParent'}
+            banner={"Отлично! Сейчас будешь выполнять <b>вместе со взрослым</b>, искать буквы по очереди"}
+            logs={dataTest.shulteRandomCharWithParent.logs}
+            items={makeRandomArray(chars)}
+            variants={makeRandomArray(chars).slice(0, MAX_VARIANTS)}
+            next={handleRandomNext}
+        />,
+        () => <ShulteMulti
+            key={"images"}
+            heading="Найдите картинки: "
+            logKey={'shulteRandomImages'}
+            banner={"Замечательно! Продолжайте также искать картинки в следующей таблице. Искать нужно КАК МОЖНО БЫСТРЕЕ"}
+            logs={dataTest.shulteRandomImages.logs}
+            items={images}
+            variants={imagesVariants.slice(0, MAX_VARIANTS)}
+            next={handleRandomNext}
+            isImages
+        />,
+        () => <ShulteMulti
+            key={"images-parents"}
+            heading="Найдите картинки: "
+            logKey={'shulteRandomImagesWithParent'}
+            banner={"Отлично! Сейчас будешь выполнять <b>вместе со взрослым</b>, искать картинки по очереди"}
+            logs={dataTest.shulteRandomImagesWithParent.logs}
+            items={makeRandomArray(images)}
+            variants={imagesVariants.slice(0, MAX_VARIANTS)}
+            next={handleRandomNext}
+            isImages
+        />
     ])])
     
     const ref = useRef(1);
